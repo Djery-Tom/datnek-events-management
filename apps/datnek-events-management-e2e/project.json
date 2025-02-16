@@ -1,0 +1,9 @@
+{
+  "name": "datnek-events-management-e2e",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "application",
+  "sourceRoot": "apps/datnek-events-management-e2e/src",
+  "implicitDependencies": ["datnek-events-management"],
+  "// targets": "to see all targets run: nx show project datnek-events-management-e2e --web",
+  "targets": {}
+}

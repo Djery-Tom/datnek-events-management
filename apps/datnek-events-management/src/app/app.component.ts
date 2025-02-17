@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { RouterModule } from '@angular/router';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   imports: [RouterModule],
@@ -9,5 +10,11 @@ import { RouterModule } from '@angular/router';
   styleUrl: './app.component.scss',
 })
 export class AppComponent {
-  title = 'datnek-events-management';
+  title = 'Datnek Events Management';
+
+  private titleService = inject(Title);
+
+  constructor() {
+    this.titleService.setTitle(this.title);
+  }
 }

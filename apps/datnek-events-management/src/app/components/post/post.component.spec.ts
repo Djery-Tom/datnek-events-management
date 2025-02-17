@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { PublishCardComponent } from './publish-card.component';
+import { PostComponent } from './post.component';
 import { TranslateModule, TranslatePipe, TranslateService } from '@ngx-translate/core';
 
 describe('PublishCardComponent', () => {
-  let component: PublishCardComponent;
-  let fixture: ComponentFixture<PublishCardComponent>;
+  let component: PostComponent;
+  let fixture: ComponentFixture<PostComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [PublishCardComponent, TranslateModule.forRoot()],
+      imports: [PostComponent, TranslateModule.forRoot()],
       providers: [TranslateService]
     }).compileComponents();
 
-    fixture = TestBed.createComponent(PublishCardComponent);
+    fixture = TestBed.createComponent(PostComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

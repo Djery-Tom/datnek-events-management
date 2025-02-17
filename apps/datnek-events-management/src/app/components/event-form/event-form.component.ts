@@ -3,10 +3,10 @@ import { CommonModule } from '@angular/common';
 import { TranslatePipe } from '@ngx-translate/core';
 
 @Component({
-  selector: 'app-event-modal',
+  selector: 'app-event-form',
   standalone: true,
   imports: [CommonModule, TranslatePipe],
-  templateUrl: './event-modal.component.html',
-  styleUrl: './event-modal.component.css',
+  templateUrl: './event-form.component.html',
+  styleUrl: './event-form.component.css',
 })
-export class EventModalComponent {}
+export class EventFormComponent {}

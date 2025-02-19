@@ -4,9 +4,10 @@ export namespace EventOutput {
   export interface Create {
     id: number
     coverImage: string;
-    organizerId: number;
+    organizer: string;
     eventUrl?: string;
     eventLocation?: string;
+    eventName: string;
     startDate: string;
     startTime: string;
     endDate: string;
@@ -17,9 +18,10 @@ export namespace EventOutput {
   export class Get {
     id = 0;
     coverImage = '';
-    organizerId = 0;
+    organizer = '';
     eventUrl?: string;
     eventLocation?: string;
+    eventName = '';
     startDate = '';
     startTime = '';
     endDate = '';

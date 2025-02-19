@@ -30,8 +30,8 @@ export class EventState {
   private translateService= inject(TranslateService);
 
 
-  @Action(EventAction.Create)
-  createEvent({patchState, getState}: StateContext<EventStateModel>, {event}: EventAction.Create): Observable<EventOutput.Create> {
+  @Action(EventAction.Add)
+  createEvent({patchState, getState}: StateContext<EventStateModel>, {event}: EventAction.Add): Observable<EventOutput.Create> {
      const {events} = getState();
     return this.eventService.createEvent(event)
       .pipe(

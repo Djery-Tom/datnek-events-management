@@ -1,4 +1,4 @@
-import { EventInput } from '../../domain/dto/inputs/event.input';
+import { EventInput } from '../../domain/dto';
 
 // eslint-disable-next-line @typescript-eslint/no-namespace
 export namespace EventAction {
@@ -8,6 +8,10 @@ export namespace EventAction {
 
     constructor(public event: EventInput.Create) {
     }
+  }
+
+  export class FetchAll {
+    static readonly type = '[EventAction] Fetch All';
   }
 
 }

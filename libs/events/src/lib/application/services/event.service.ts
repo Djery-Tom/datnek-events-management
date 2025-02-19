@@ -1,6 +1,6 @@
 import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';;
+import { Injectable } from '@angular/core';
 import { EventOutput, EventInput } from '../../domain/dto';
 
 @Injectable({
@@ -15,6 +15,10 @@ export class EventService {
 
   createEvent(event: EventInput.Create): Observable<EventOutput.Create> {
     return this.http.post<EventOutput.Create>(this.eventsUrl, event);
+  }
+
+  getEvents(): Observable<EventOutput.Get[]> {
+    return this.http.get<EventOutput.Get[]>(this.eventsUrl);
   }
 
 

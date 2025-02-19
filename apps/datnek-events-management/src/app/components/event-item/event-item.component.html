@@ -1,21 +1,27 @@
-<p class="mb-3">{{event.description}}</p>
-<div class="card p-3 shadow-sm rounded border-0" style="max-width: 600px; margin: auto;">
+<div class="card p-3 shadow-sm rounded-4 border-0 mb-3" style="max-width: 600px; margin: auto;">
   <div class="d-flex align-items-center">
     <img src="images/default-avatar.webp" height="42" width="42" alt="profile image" class="rounded-circle me-2">
     <div class="flex-grow-1">
-      <strong>{{event.organizerId}}</strong> <i class="fas fa-check-circle text-primary"></i>
+      <strong>{{event.organizer}}</strong> <i class="fas fa-check-circle text-primary ms-1"></i>
       <p class="text-muted mb-0">a publié dans <span class="fw-bold">{{'@nomDuGroupe'}}</span></p>
       <p class="text-muted mb-0 small">Il y a 5j • <i class="fas fa-globe"></i></p>
     </div>
-    <div class="dropdown">
+    <div class="dropdown-center">
       <button class="btn" type="button" data-bs-toggle="dropdown" aria-expanded="false">
         <i class="fas fa-ellipsis-h"></i>
       </button>
+      <ul class="dropdown-menu">
+        <li><a class="dropdown-item" href="#" (click)="onUpdate()"><i class="fas fa-edit"></i> {{'update'| translate}}</a></li>
+        <li><a class="dropdown-item" href="#" (click)="onDelete()"><i class="fas fa-trash"></i> {{'delete' | translate}}</a></li>
+      </ul>
     </div>
   </div>
+  <span class="fs-6 inline-block fw-semibold">{{event.eventName}}</span>
   <p class="mt-2" [textContent]="event.description"></p>
+  @if (event.description.length > 200) {
+    <a href="#" class="text-primary text-decoration-none">Voir plus</a>
+  }
   <img [src]="event.coverImage" class="img-fluid" alt="event cover image"/>
-  <a href="#" class="text-primary text-decoration-none">Voir plus</a>
   <div class="d-flex align-items-center mt-3 text-muted">
     <i class="fas fa-heart me-1 text-primary"></i> 12k
     <i class="fas fa-comment-dots ms-3 me-1"></i> 234

@@ -8,6 +8,8 @@
   "challenge_name_or_title": "Le nom ou titre du challenge",
   "create_event": "Créér un évènement",
   "no_event": "Aucun évènement",
+  "update": "Modifier",
+  "delete": "Supprimer",
 
   "form" : {
     "download_cover_image": "Téléchargez une photo de couverture",

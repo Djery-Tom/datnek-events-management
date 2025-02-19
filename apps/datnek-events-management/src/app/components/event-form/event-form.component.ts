@@ -53,13 +53,13 @@ export class EventFormComponent {
 
   private configOrganizerField(): FormlyFieldConfig {
     return {
-      key: 'organizerId',
+      key: 'organizer',
       type: 'select',
       props: {
         required: true,
         options: [
-          { label: 'Djery DIETCHI', value: '1' },
-          { label: 'Danick Takam', value: '2' },
+          { label: 'Djery DIETCHI', value: 'Djery DIETCHI' },
+          { label: 'Danick Takam', value: 'Danick Takam' },
         ],
       },
       expressions: {
@@ -273,7 +273,7 @@ export class EventFormComponent {
       return;
     }
 
-    this.store.dispatch(new EventAction.Create(this.model as EventInput.Create)).subscribe({
+    this.store.dispatch(new EventAction.Add(this.model as EventInput.Create)).subscribe({
       next: () => {
         this.closeModal();
         this.resetForm(formDirective);

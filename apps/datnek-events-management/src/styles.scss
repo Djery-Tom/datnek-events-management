@@ -1,6 +1,8 @@
 /* You can add global styles to this file, and also import other style files */
 @import "bootstrap/scss/bootstrap";
 
+// boostrap 5 toastr style
+@import 'ngx-toastr/toastr-bs5-alert';
 
 html, body { height: 100%; background: #f1f2f5;}
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

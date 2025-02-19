@@ -1,0 +1,14 @@
+formly-wrapper-form-field div {
+  padding-left: 15px;
+  padding-right: 15px;
+  margin-bottom: 15px;
+}
+
+formly-field-multicheckbox {
+  display: block;
+
+  div {
+    padding: 0;
+    margin: 0;
+  }
+}

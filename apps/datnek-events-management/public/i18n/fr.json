@@ -6,5 +6,32 @@
   "challenge": "Challenge",
   "what_new": "Quoi de neuf ?",
   "challenge_name_or_title": "Le nom ou titre du challenge",
-  "create_event": "Créér un évènement"
+  "create_event": "Créér un évènement",
+
+  "form" : {
+    "download_cover_image": "Téléchargez une photo de couverture",
+    "min_file_size": "Largeur minimum de 1280 x 720",
+    "organizer": "Organisateur",
+    "event_type": "Type d'évènement",
+    "online": "En ligne",
+    "in_person": "En Présentiel",
+    "event_name": "Nom de l'évènement",
+    "start_date": "Date de début",
+    "start_time": "Heure de début",
+    "end_date": "Date de fin",
+    "end_time": "Heure de fin",
+    "description": "Description",
+    "event_url": "Lien du meeting",
+    "event_location": "Adresse du lieu de l'évènement",
+    "publish": "Publier"
+  },
+
+  "errors": {
+    "required_field": "Ce champ est obligatoire",
+    "invalid_url_format": "Le format de l'url est invalide"
+  },
+
+  "toast" : {
+    "success_message": "Enregistrement eﬀectué avec succès"
+  }
 }

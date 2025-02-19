@@ -13,13 +13,14 @@ import { EVENTS_STATE_NAME } from '../../domain/constants';
 
 
 interface EventStateModel {
-  events: EventOutput.Get[]
+  events: EventOutput.Get[],
+  selectedEvent?: EventOutput.Get,
 }
 
 @State<EventStateModel>({
   name: EVENTS_STATE_NAME,
   defaults: {
-    events: []
+    events: [],
   }
 })
 @Injectable()
@@ -32,13 +33,14 @@ export class EventState {
 
   @Action(EventAction.Add)
   createEvent({patchState, getState}: StateContext<EventStateModel>, {event}: EventAction.Add): Observable<EventOutput.Create> {
-     const {events} = getState();
+    const {events} = getState();
+
     return this.eventService.createEvent(event)
       .pipe(
         map((eventCreated) => {
 
           patchState({
-            events: [...events, Object.assign(new EventOutput.Get() , eventCreated)]
+            events: [Object.assign(new EventOutput.Get() , eventCreated), ...events]
           })
 
           this.toastService.success(this.translateService.instant('toast.success_message'));
@@ -50,7 +52,6 @@ export class EventState {
 
   @Action(EventAction.FetchAll)
   fetchAllEvents({patchState}: StateContext<EventStateModel>): Observable<EventOutput.Get[]> {
-
     return this.eventService.getEvents()
       .pipe(
         map((events) => {
@@ -62,6 +63,31 @@ export class EventState {
           })
 
           return events;
+        })
+      );
+  }
+
+  @Action(EventAction.GetById)
+  getEventById({patchState}: StateContext<EventStateModel>, {id}: EventAction.GetById): Observable<EventOutput.Get|undefined> {
+    return this.eventService.getEventById(id)
+      .pipe(
+        map((event) => {
+          patchState({
+            selectedEvent: Object.assign(new EventOutput.Get(), event)
+          })
+          return event;
+        })
+      );
+  }
+
+
+  @Action(EventAction.Edit)
+  updateEvent({patchState}: StateContext<EventStateModel>, {event}: EventAction.Edit): Observable<EventOutput.Update> {
+    return this.eventService.updateEvent(event)
+      .pipe(
+        map((eventUpdated) => {
+          this.toastService.success(this.translateService.instant('toast.success_message'));
+          return eventUpdated;
         })
       );
   }

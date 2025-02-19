@@ -21,5 +21,13 @@ export class EventService {
     return this.http.get<EventOutput.Get[]>(this.eventsUrl);
   }
 
+  getEventById(id: number): Observable<EventOutput.Get|undefined> {
+    return this.http.get<EventOutput.Get|undefined>(this.eventsUrl+'/'+id);
+  }
+
+  updateEvent(event: EventInput.Update): Observable<EventOutput.Update> {
+    return this.http.put<EventOutput.Update>(this.eventsUrl+'/'+event.id, event);
+  }
+
 
 }

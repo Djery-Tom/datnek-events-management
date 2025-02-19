@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FieldType, FieldTypeConfig, FormlyModule } from '@ngx-formly/core';
 import { ReactiveFormsModule } from '@angular/forms';
@@ -12,7 +12,7 @@ import { TranslatePipe } from '@ngx-translate/core';
   styleUrl: './cover-image-input.component.css',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class CoverImageInputComponent extends FieldType<FieldTypeConfig> {
+export class CoverImageInputComponent extends FieldType<FieldTypeConfig> implements OnInit {
   public $previewUrl = signal<string | undefined>(undefined);
 
   // Image Preview
@@ -36,5 +36,9 @@ export class CoverImageInputComponent extends FieldType<FieldTypeConfig> {
 
   formControlHasError(): boolean {
     return this.formControl.touched && this.formControl.hasError('required');
+  }
+
+  ngOnInit(): void {
+    this.$previewUrl.set(this.formControl.value)
   }
 }

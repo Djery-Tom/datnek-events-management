@@ -2,7 +2,7 @@
   <div class="card-body">
     <div class="d-flex flex-row">
       <img src="images/default-avatar.webp" height="42" width="42" alt="profile image" class="me-2"/>
-      <input type="text" [placeholder]="'what_new'| translate" class="form-control py-3 rounded-4" style="cursor: pointer" readonly data-bs-toggle="modal" data-bs-target="#eventModal">
+      <input type="text" [placeholder]="'what_new'| translate" class="form-control py-3 rounded-4" style="cursor: pointer" readonly (click)="openEventModal()">
     </div>
   </div>
   <div class="card-footer bg-transparent border-top-0 pt-0 pb-3 px-3">
@@ -25,5 +25,3 @@
     </div>
   </div>
 </div>
-
-<app-event-form></app-event-form>

@@ -14,4 +14,18 @@ export namespace EventInput {
     description: string;
   }
 
+  export interface Update {
+    id: number;
+    coverImage: string;
+    organizer: string;
+    eventUrl?: string;
+    eventLocation?: string;
+    eventName: string;
+    startDate: string;
+    startTime: string;
+    endDate: string;
+    endTime: string;
+    description: string;
+  }
+
 }

@@ -1,0 +1,7 @@
+.cover-image-input {
+  height: 250px;
+  cursor: pointer;
+  background-repeat: no-repeat !important;
+  background-position: center center !important;
+  background-size: contain !important;
+}

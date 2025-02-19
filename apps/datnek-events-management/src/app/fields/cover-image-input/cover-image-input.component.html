@@ -1,0 +1,12 @@
+<!-- Cover Image -->
+<div class="mb-3 d-flex flex-column align-content-center justify-content-center text-center p-5 cover-image-input"
+     (click)="coverImage.click()" [style.background]="$previewUrl() ? 'url('+$previewUrl()+')' : 'grey'">
+  <label class="form-label fw-bold" for="cover-image">{{'form.download_cover_image' | translate}}</label>
+  <input type="file" class="d-none" id="cover-image" accept="image/jpeg,image/png" [formControl]="formControl"
+         [formlyAttributes]="field" #coverImage (change)="showPreview($event)">
+  <small class="form-text text-muted">{{'form.min_file_size' | translate}}</small>
+</div>
+
+@if (formControl.touched && formControl.hasError('required')) {
+  <div class="d-block invalid-feedback ms-3 mb-3" >{{'errors.required_field' | translate}}</div>
+}

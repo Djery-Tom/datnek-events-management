@@ -1,0 +1,11 @@
+<div class="mt-3">
+  @if ($events()) {
+    @for (event of $events() ; track event) {
+      @defer {
+        <app-event-item [event]="event"></app-event-item>
+      }
+    } @empty {
+      <p class="text-center text-muted my-5">{{'no_event' | translate}}</p>
+    }
+  }
+</div>

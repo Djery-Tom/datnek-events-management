@@ -3,9 +3,10 @@ export namespace EventInput {
 
   export interface Create {
     coverImage: string;
-    organizerId: number;
+    organizer: string;
     eventUrl?: string;
     eventLocation?: string;
+    eventName: string;
     startDate: string;
     startTime: string;
     endDate: string;

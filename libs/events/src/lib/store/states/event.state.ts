@@ -9,6 +9,7 @@ import { EventOutput } from '../../domain/dto';
 import { EventService } from '../../application/services';
 import { ToastrService } from 'ngx-toastr';
 import { TranslateService } from '@ngx-translate/core';
+import { EVENTS_STATE_NAME } from '../../domain/constants';
 
 
 interface EventStateModel {
@@ -16,7 +17,7 @@ interface EventStateModel {
 }
 
 @State<EventStateModel>({
-  name: 'events',
+  name: EVENTS_STATE_NAME,
   defaults: {
     events: []
   }
@@ -29,8 +30,8 @@ export class EventState {
   private translateService= inject(TranslateService);
 
 
-  @Action(EventAction.Create)
-  createEvent({patchState, getState}: StateContext<EventStateModel>, {event}: EventAction.Create): Observable<EventOutput.Create> {
+  @Action(EventAction.Add)
+  createEvent({patchState, getState}: StateContext<EventStateModel>, {event}: EventAction.Add): Observable<EventOutput.Create> {
      const {events} = getState();
     return this.eventService.createEvent(event)
       .pipe(
@@ -43,6 +44,24 @@ export class EventState {
           this.toastService.success(this.translateService.instant('toast.success_message'));
 
           return eventCreated;
+        })
+      );
+  }
+
+  @Action(EventAction.FetchAll)
+  fetchAllEvents({patchState}: StateContext<EventStateModel>): Observable<EventOutput.Get[]> {
+
+    return this.eventService.getEvents()
+      .pipe(
+        map((events) => {
+
+          events = events.map(e => Object.assign(new EventOutput.Get(), e));
+
+          patchState({
+            events: events
+          })
+
+          return events;
         })
       );
   }

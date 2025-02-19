@@ -9,6 +9,11 @@ import { provideTranslateService, TranslateLoader, TranslateService } from '@ngx
 import { FormlyModule } from '@ngx-formly/core';
 import { FormlyBootstrapModule } from '@ngx-formly/bootstrap';
 import { CoverImageInputComponent } from './fields/cover-image-input/cover-image-input.component';
+import { provideStore } from '@ngxs/store';
+import { InMemoryWebApiModule } from 'angular-in-memory-web-api';
+import { DatabaseService, EventState } from '@datnek-events-management/events';
+import { provideAnimations } from '@angular/platform-browser/animations';
+import { provideToastr } from 'ngx-toastr';
 
 registerLocaleData(localeFr, 'fr');
 
@@ -31,13 +36,17 @@ export const appConfig: ApplicationConfig = {
       FormlyModule.forRoot({
         types: [
           { name: 'cover-image-input', component: CoverImageInputComponent },
-        ]
+        ],
       }),
       FormlyBootstrapModule,
     ),
     provideZoneChangeDetection({ eventCoalescing: true }),
     provideRouter(appRoutes),
     provideHttpClient(withFetch()),
+    importProvidersFrom(InMemoryWebApiModule.forRoot(DatabaseService, {passThruUnknownUrl: true})),
+    provideStore([EventState]),
+    provideAnimations(),
+    provideToastr(),
     provideTranslateService({
       loader: {
         provide: TranslateLoader,

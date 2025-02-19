@@ -16,7 +16,7 @@ export class CoverImageInputComponent extends FieldType<FieldTypeConfig> {
   public $previewUrl = signal<string | undefined>(undefined);
 
   // Image Preview
-  showPreview(event: Event) {
+  showPreview(event: Event): void {
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-expect-error
     const file = (event.target as HTMLInputElement).files[0];
@@ -24,9 +24,17 @@ export class CoverImageInputComponent extends FieldType<FieldTypeConfig> {
     if (file) {
       const reader = new FileReader();
       reader.onload = (event) => {
-        this.$previewUrl.set((<FileReader>event.target).result as string);
+        const base64Image = (<FileReader>event.target).result as string;
+        this.$previewUrl.set(base64Image);
+
+        // Use base64Image as value of formControl
+        this.formControl.setValue(base64Image);
       };
       reader.readAsDataURL(file);
     }
+  }
+
+  formControlHasError(): boolean {
+    return this.formControl.touched && this.formControl.hasError('required');
   }
 }

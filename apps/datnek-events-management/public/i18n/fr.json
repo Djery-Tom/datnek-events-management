@@ -29,5 +29,9 @@
   "errors": {
     "required_field": "Ce champ est obligatoire",
     "invalid_url_format": "Le format de l'url est invalide"
+  },
+
+  "toast" : {
+    "success_message": "Enregistrement eﬀectué avec succès"
   }
 }

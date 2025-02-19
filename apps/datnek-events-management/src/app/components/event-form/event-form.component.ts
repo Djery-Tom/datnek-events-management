@@ -1,9 +1,10 @@
 import { ChangeDetectionStrategy, Component, inject, ViewEncapsulation } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { TranslatePipe, TranslateService } from '@ngx-translate/core';
-import { FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { FormGroup, FormGroupDirective, ReactiveFormsModule } from '@angular/forms';
 import { FormlyFieldConfig, FormlyFormOptions, FormlyModule } from '@ngx-formly/core';
-import { EventTypeEnum } from '@datnek-events-management/events';
+import { EventTypeEnum, EventInput , EventAction } from '@datnek-events-management/events';
+import { Store } from '@ngxs/store';
 
 
 @Component({
@@ -22,6 +23,7 @@ export class EventFormComponent {
   options: FormlyFormOptions = {};
 
   private translateService = inject(TranslateService);
+  private store = inject(Store);
 
 
   fields: FormlyFieldConfig[] = [
@@ -36,7 +38,7 @@ export class EventFormComponent {
 
   private configCoverImageField(): FormlyFieldConfig {
     return {
-      key: 'cover-image',
+      key: 'coverImage',
       type: 'cover-image-input',
       props: {
         required: true,
@@ -165,7 +167,6 @@ export class EventFormComponent {
         {
           key: 'startDate',
           type: 'input',
-          // className: 'col-12',
           props: {
             type: 'date',
             required: true,
@@ -266,12 +267,32 @@ export class EventFormComponent {
     };
   }
 
-  onSubmit() {
+  onSubmit(formDirective: FormGroupDirective) {
     if (this.form.invalid) {
       this.form.markAllAsTouched();
       return;
     }
-    alert(JSON.stringify(this.model));
 
+    this.store.dispatch(new EventAction.Create(this.model as EventInput.Create)).subscribe({
+      next: () => {
+        this.closeModal();
+        this.resetForm(formDirective);
+      }
+    });
+  }
+
+  private resetForm(formDirective: FormGroupDirective) {
+    this.form.reset();
+    formDirective.resetForm();
+  }
+
+  private closeModal() {
+    const modalElement = document.getElementById('eventModal');
+    if (modalElement) {
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      // @ts-expect-error
+      const modalInstance = bootstrap.Modal.getInstance(modalElement);
+      modalInstance?.hide();
+    }
   }
 }

@@ -6,7 +6,7 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
 
-      <form id="eventForm" [formGroup]="form" (ngSubmit)="onSubmit()">
+      <form id="eventForm" [formGroup]="form" (ngSubmit)="onSubmit(formDirective)" #formDirective="ngForm">
 
         <formly-form [model]="model" [fields]="fields" [options]="options" [form]="form"></formly-form>
 

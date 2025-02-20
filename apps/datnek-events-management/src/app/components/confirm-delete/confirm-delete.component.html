@@ -1,0 +1,11 @@
+<div class="modal-header">
+  <h1 class="modal-title fs-5" >{{ 'delete_event' | translate }}</h1>
+  <button type="button" class="btn-close" aria-label="Close" (click)="closeModal()"></button>
+</div>
+<div class="modal-body">
+  <p>{{'delete_confirmation' | translate:{eventName : event?.eventName} }}</p>
+</div>
+<div class="modal-footer">
+  <button type="button" class="btn btn-light" (click)="closeModal()">{{ 'cancel' | translate }}</button>
+  <button type="button" class="btn btn-danger" (click)="onDelete()">{{ 'delete' | translate }}</button>
+</div>

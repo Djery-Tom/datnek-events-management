@@ -28,4 +28,9 @@ export namespace EventInput {
     description: string;
   }
 
+  export interface Delete {
+    id: number;
+    eventName: string;
+  }
+
 }

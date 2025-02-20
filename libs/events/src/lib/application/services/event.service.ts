@@ -29,5 +29,9 @@ export class EventService {
     return this.http.put<EventOutput.Update>(this.eventsUrl+'/'+event.id, event);
   }
 
+  deleteEvent(id: number): Observable<EventOutput.Delete> {
+    return this.http.delete<EventOutput.Delete>(this.eventsUrl+'/'+id);
+  }
+
 
 }

@@ -37,12 +37,12 @@
         <!-- Language Selector -->
         <div class="dropdown me-3">
           <a class="nav-link dropdown-toggle" href="#" id="languageDropdown" role="button" data-bs-toggle="dropdown">
-            Francais
+            {{ 'lang.'+translateService.currentLang |  translate}}
           </a>
           <ul class="dropdown-menu">
-            <li><a class="dropdown-item" href="#">🇺🇸 English</a></li>
-            <li><a class="dropdown-item" href="#">🇫🇷 Français</a></li>
-            <li><a class="dropdown-item" href="#">🇳🇱 Nederlands</a></li>
+            <li><a class="dropdown-item" href="#" (click)="changeLanguage('fr')">🇫🇷 {{'lang.fr' | translate}}</a></li>
+            <li><a class="dropdown-item" href="#" (click)="changeLanguage('en')">🇺🇸 {{'lang.en' | translate}}</a></li>
+            <li><a class="dropdown-item" href="#" (click)="changeLanguage('ne')">🇳🇱 {{'lang.ne' | translate}}</a></li>
           </ul>
         </div>
 

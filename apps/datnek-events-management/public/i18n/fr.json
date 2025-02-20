@@ -10,6 +10,7 @@
   "no_event": "Aucun évènement",
   "update": "Modifier",
   "delete": "Supprimer",
+  "update_event": "Modifier un évènement",
 
   "form" : {
     "download_cover_image": "Téléchargez une photo de couverture",

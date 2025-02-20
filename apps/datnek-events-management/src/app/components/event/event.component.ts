@@ -24,8 +24,6 @@ export class EventComponent implements OnInit {
       .pipe(map((eventState) => eventState.events))
   );
 
-  // public $events = signal<EventOutput.Get[]>([]);
-
   ngOnInit(): void {
     this.store.dispatch(EventAction.FetchAll);
   }

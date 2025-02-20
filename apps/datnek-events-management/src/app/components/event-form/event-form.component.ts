@@ -1,10 +1,27 @@
-import { ChangeDetectionStrategy, Component, inject, ViewEncapsulation } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  inject,
+  Input,
+  OnInit,
+  signal,
+  ViewEncapsulation
+} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { TranslatePipe, TranslateService } from '@ngx-translate/core';
 import { FormGroup, FormGroupDirective, ReactiveFormsModule } from '@angular/forms';
 import { FormlyFieldConfig, FormlyFormOptions, FormlyModule } from '@ngx-formly/core';
-import { EventTypeEnum, EventInput , EventAction } from '@datnek-events-management/events';
+import {
+  EventTypeEnum,
+  EventInput,
+  EventAction,
+  EventOutput,
+  EVENTS_STATE_NAME
+} from '@datnek-events-management/events';
 import { Store } from '@ngxs/store';
+import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import { toSignal } from '@angular/core/rxjs-interop';
+import { map } from 'rxjs';
 
 
 @Component({
@@ -16,15 +33,24 @@ import { Store } from '@ngxs/store';
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class EventFormComponent {
+export class EventFormComponent implements OnInit {
+
+  private translateService = inject(TranslateService);
+  private store = inject(Store);
+  private activeModal = inject(NgbActiveModal);
 
   form = new FormGroup({});
   model: any = {};
   options: FormlyFormOptions = {};
 
-  private translateService = inject(TranslateService);
-  private store = inject(Store);
-
+  // Event id on update
+  @Input() eventId?: number;
+  public $loading = signal(false);
+  private $selectedEvent = toSignal<EventOutput.Get|undefined>(
+    this.store
+      .select((state) => state[EVENTS_STATE_NAME])
+      .pipe(map((eventState) => eventState.selectedEvent))
+  );
 
   fields: FormlyFieldConfig[] = [
     this.configCoverImageField(),
@@ -42,6 +68,9 @@ export class EventFormComponent {
       type: 'cover-image-input',
       props: {
         required: true,
+      },
+      expressions: {
+        'model.coverImage': (field: FormlyFieldConfig) => this.$selectedEvent()?.coverImage
       },
       validation: {
         messages: {
@@ -64,10 +93,11 @@ export class EventFormComponent {
       },
       expressions: {
         'props.label': this.translateService.stream('form.organizer'),
+        'model.organizer': (field: FormlyFieldConfig) =>  this.$selectedEvent()?.organizer
       },
       validation: {
         messages: {
-          required:  () => this.translateService.instant('errors.required_field'),
+          required: () => this.translateService.instant('errors.required_field'),
         },
       },
     };
@@ -83,6 +113,7 @@ export class EventFormComponent {
       },
       expressions: {
         'props.label': this.translateService.stream('form.event_name'),
+        'model.eventName': (field: FormlyFieldConfig) => this.$selectedEvent()?.eventName
       },
       validation: {
         messages: {
@@ -102,11 +133,15 @@ export class EventFormComponent {
           formCheck: "inline",
           options: [
             { label: this.translateService.instant('form.online'), value: EventTypeEnum.ONLINE },
-            { label: this.translateService.instant('form.in_person'), value:  EventTypeEnum.IN_PERSON },
+            { label: this.translateService.instant('form.in_person'), value: EventTypeEnum.IN_PERSON },
           ],
         },
         expressions: {
           'props.label': this.translateService.stream('form.event_type'),
+          'model.eventType': (field: FormlyFieldConfig) => JSON.parse(JSON.stringify({
+            [EventTypeEnum.ONLINE] : this.$selectedEvent()?.isOnline(),
+            [EventTypeEnum.IN_PERSON] : this.$selectedEvent()?.isInPerson()
+          })),
         },
         validation: {
           messages: {
@@ -120,11 +155,14 @@ export class EventFormComponent {
         props: {
           type: 'text',
           required: true,
-          pattern: '^(https?:\\/\\/)?([\\w\\-]+\\.)+[\\w]{2,}(\\/[\\w\\-._~:/?#[\\]@!$&\'()*+,;=]*)?$',
+          pattern: new RegExp(
+            '^(https?:\\/\\/)([\\w\\-]+\\.)+[\\w]{2,}([\\/\\w\\-._~:/?#[\\]@!$&\'()*+,;=]*)?$'
+          ),
           description: "Eg: https://example.com",
         },
         expressions: {
           'props.label': this.translateService.stream('form.event_url'),
+          'model.eventUrl': (field: FormlyFieldConfig) => this.$selectedEvent()?.eventUrl,
           hide: (field: FormlyFieldConfig) => {
             const eventType = field.model?.eventType;
             return eventType ? !eventType[EventTypeEnum.ONLINE] : true;
@@ -146,6 +184,7 @@ export class EventFormComponent {
         },
         expressions: {
           'props.label': this.translateService.stream('form.event_location'),
+          'model.eventLocation': (field: FormlyFieldConfig) => this.$selectedEvent()?.eventLocation,
           hide: (field: FormlyFieldConfig) => {
             const eventType = field.model?.eventType;
             return eventType ? !eventType[EventTypeEnum.IN_PERSON] : true;
@@ -174,6 +213,7 @@ export class EventFormComponent {
           expressions: {
             'props.label': this.translateService.stream('form.start_date'),
             'className': (field: FormlyFieldConfig) => field.model?.startDate ? 'col-6': 'col-12',
+            'model.startDate': (field: FormlyFieldConfig) => this.$selectedEvent()?.startDate,
           },
           validation: {
             messages: {
@@ -192,6 +232,7 @@ export class EventFormComponent {
           expressions: {
             'props.label': this.translateService.stream('form.start_time'),
             hide: '!model.startDate',
+            'model.startTime': (field: FormlyFieldConfig) => this.$selectedEvent()?.startTime,
           },
           validation: {
             messages: {
@@ -217,6 +258,7 @@ export class EventFormComponent {
           },
           expressions: {
             'props.label': this.translateService.stream('form.end_date'),
+            'model.endDate': (field: FormlyFieldConfig) => this.$selectedEvent()?.endDate
           },
           validation: {
             messages: {
@@ -234,6 +276,7 @@ export class EventFormComponent {
           },
           expressions: {
             'props.label': this.translateService.stream('form.end_time'),
+            'model.endTime': (field: FormlyFieldConfig) => this.$selectedEvent()?.endTime
           },
           validation: {
             messages: {
@@ -258,6 +301,8 @@ export class EventFormComponent {
       },
       expressions: {
         'props.label': this.translateService.stream('form.description'),
+        'model.description': (field: FormlyFieldConfig) => this.$selectedEvent()?.description
+
       },
       validation: {
         messages: {
@@ -273,10 +318,18 @@ export class EventFormComponent {
       return;
     }
 
-    this.store.dispatch(new EventAction.Add(this.model as EventInput.Create)).subscribe({
+    const subscription$ = this.eventId ? this.store.dispatch(new EventAction.Edit(<EventInput.Update>{id: this.eventId, ...this.model}))
+      : this.store.dispatch(new EventAction.Add(this.model as EventInput.Create));
+
+    subscription$.subscribe({
       next: () => {
-        this.closeModal();
+        // Refresh events if update is successful
+        if(this.eventId){
+          this.store.dispatch(EventAction.FetchAll);
+        }
+
         this.resetForm(formDirective);
+        this.closeModal();
       }
     });
   }
@@ -286,13 +339,18 @@ export class EventFormComponent {
     formDirective.resetForm();
   }
 
-  private closeModal() {
-    const modalElement = document.getElementById('eventModal');
-    if (modalElement) {
-      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-      // @ts-expect-error
-      const modalInstance = bootstrap.Modal.getInstance(modalElement);
-      modalInstance?.hide();
+  public closeModal() {
+    this.activeModal.dismiss('Close');
+  }
+
+  ngOnInit(): void {
+    // Fetch Event By Id when update
+    if(this.eventId){
+      this.$loading.set(true);
+      this.store.dispatch(new EventAction.GetById(this.eventId)).subscribe({
+        error: (err) => this.$loading.set(false),
+        complete: () => this.$loading.set(false)
+      });
     }
   }
 }

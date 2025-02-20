@@ -1,21 +1,24 @@
-<div class="modal fade" id="eventModal" tabindex="-1" aria-labelledby="eventModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h1 class="modal-title fs-5" id="eventModalLabel">{{ 'create_event' | translate }}</h1>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
+<div class="modal-header">
+  <h1 class="modal-title fs-5" >{{ (eventId ? 'update_event': 'create_event') | translate }}</h1>
+  <button type="button" class="btn-close" aria-label="Close" (click)="closeModal()"></button>
+</div>
 
-      <form id="eventForm" [formGroup]="form" (ngSubmit)="onSubmit(formDirective)" #formDirective="ngForm">
-
-        <formly-form [model]="model" [fields]="fields" [options]="options" [form]="form"></formly-form>
-
-        <div class="modal-footer">
-          <button type="submit" class="btn btn-primary">{{ 'form.publish' | translate }}</button>
-        </div>
-      </form>
+@if ($loading()) {
+  <div class="d-flex justify-content-center align-items-center" style="min-height: 600px">
+    <div class="spinner-border text-primary" role="status">
+      <span class="visually-hidden">{{'loading' | translate}}</span>
     </div>
   </div>
-</div>
+} @else {
+  <form id="eventForm" [formGroup]="form" (ngSubmit)="onSubmit(formDirective)" #formDirective="ngForm">
+    <formly-form [model]="model" [fields]="fields" [options]="options" [form]="form"></formly-form>
+
+    <div class="modal-footer">
+      <button type="submit" class="btn btn-primary">{{ 'form.publish' | translate }}</button>
+    </div>
+  </form>
+}
+
+
 
 

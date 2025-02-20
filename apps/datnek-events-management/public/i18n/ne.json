@@ -1,0 +1,50 @@
+{
+  "photos": "Foto's",
+  "videos": "Video's",
+  "posts": "Artikelen",
+  "event": "Gebeurtenis",
+  "challenge": "Uitdaging",
+  "what_new": "Wat is er nieuw?",
+  "challenge_name_or_title": "De naam of titel van de uitdaging",
+  "create_event": "Maak een gebeurtenis",
+  "no_event": "Geen gebeurtenis",
+  "update": "Wijzigen",
+  "delete": "Verwijderen",
+  "update_event": "Een gebeurtenis wijzigen",
+  "delete_event": "Verwijder een gebeurtenis",
+  "delete_confirmation": "Weet u zeker dat u {{eventName}} wilt verwijderen?",
+  "cancel": "Annuleren",
+
+  "form" : {
+    "download_cover_image": "Upload een omslagfoto",
+    "min_file_size": "Minimale breedte van 1280 x 720",
+    "organizer": "Organisator",
+    "event_type": "Gebeurtenistype",
+    "online": "Online",
+    "in_person": "Persoonlijk",
+    "event_name": "Evenementnaam",
+    "start_date": "Startdatum",
+    "start_time": "Starttijd",
+    "end_date": "Einddatum",
+    "end_time": "Eindtijd",
+    "description": "Beschrijving",
+    "event_url": "Vergaderlink",
+    "event_location": "Adres van de evenementenlocatie",
+    "publish": "Publiceren"
+  },
+
+  "errors": {
+    "required_field": "Dit veld is verplicht",
+    "invalid_url_format": "De url-indeling is ongeldig"
+  },
+
+  "toast" : {
+    "success_message": "Succesvolle registratie"
+  },
+
+  "lang": {
+    "fr": "Francais",
+    "en": "English",
+    "ne": "Nederlands"
+  }
+}

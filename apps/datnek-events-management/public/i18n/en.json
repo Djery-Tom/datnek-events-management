@@ -1,4 +1,50 @@
 {
- "photos": "Photos",
-  "videos": "Vidéos"
+  "photos": "Photos",
+  "videos": "Videos",
+  "posts": "Articles",
+  "event": "Event",
+  "challenge": "Challenge",
+  "what_new": "What's new?",
+  "challenge_name_or_title": "The name or title of the challenge",
+  "create_event": "Create an event",
+  "no_event": "No event",
+  "update": "Modify",
+  "delete": "Delete",
+  "update_event": "Modify an event",
+  "delete_event": "Delete an event",
+  "delete_confirmation": "Do you really want to delete {{eventName}}?",
+  "cancel": "Cancel",
+
+  "form": {
+    "download_cover_image": "Download a cover photo",
+    "min_file_size": "Minimum width of 1280 x 720",
+    "organizer": "Organiser",
+    "event_type": "Type of event",
+    "online": "Online",
+    "in_person": "In person",
+    "event_name": "Name of the event",
+    "start_date": "Start date",
+    "start_time": "Start time",
+    "end_date": "End date",
+    "end_time": "End time",
+    "description": "Description",
+    "event_url": "Meeting link",
+    "event_location": "Address of the event location",
+    "publish": "Publish"
+  },
+
+  "errors": {
+    "required_field": "This field is required",
+    "invalid_url_format": "The url format is invalid"
+  },
+
+  "toast": {
+    "success_message": "Registration eﬀ performed successfully"
+  },
+
+  "lang": {
+    "fr": "Francais",
+    "en": "English",
+    "ne": "Nederlands"
+  }
 }

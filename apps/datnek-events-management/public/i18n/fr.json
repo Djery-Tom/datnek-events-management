@@ -40,5 +40,11 @@
 
   "toast" : {
     "success_message": "Enregistrement eﬀectué avec succès"
+  },
+
+  "lang": {
+    "fr": "Francais",
+    "en": "English",
+    "ne": "Nederlands"
   }
 }

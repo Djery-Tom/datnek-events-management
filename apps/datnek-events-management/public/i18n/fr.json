@@ -11,6 +11,9 @@
   "update": "Modifier",
   "delete": "Supprimer",
   "update_event": "Modifier un évènement",
+  "delete_event": "Supprimer un évènement",
+  "delete_confirmation": "Voulez vous vraiment supprimer {{eventName}} ?",
+  "cancel": "Annuler",
 
   "form" : {
     "download_cover_image": "Téléchargez une photo de couverture",

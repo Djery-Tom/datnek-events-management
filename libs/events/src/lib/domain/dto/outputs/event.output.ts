@@ -51,5 +51,9 @@ export namespace EventOutput {
     description: string;
   }
 
+  export interface Delete {
+    id: number
+  }
+
 
 }

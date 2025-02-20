@@ -41,7 +41,7 @@ export class EventState {
 
           patchState({
             events: [Object.assign(new EventOutput.Get() , eventCreated), ...events]
-          })
+          });
 
           this.toastService.success(this.translateService.instant('toast.success_message'));
 
@@ -60,7 +60,7 @@ export class EventState {
 
           patchState({
             events: events
-          })
+          });
 
           return events;
         })
@@ -74,7 +74,7 @@ export class EventState {
         map((event) => {
           patchState({
             selectedEvent: Object.assign(new EventOutput.Get(), event)
-          })
+          });
           return event;
         })
       );
@@ -88,6 +88,23 @@ export class EventState {
         map((eventUpdated) => {
           this.toastService.success(this.translateService.instant('toast.success_message'));
           return eventUpdated;
+        })
+      );
+  }
+
+  @Action(EventAction.Delete)
+  deleteEvent({patchState, getState}: StateContext<EventStateModel>, {id}: EventAction.Delete): Observable<EventOutput.Delete> {
+
+    const {events} = getState();
+
+    return this.eventService.deleteEvent(id)
+      .pipe(
+        map((event) => {
+          patchState({
+            events: events.filter(e => e.id !== id)
+          });
+
+          return event;
         })
       );
   }

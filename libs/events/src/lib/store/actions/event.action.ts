@@ -28,4 +28,11 @@ export namespace EventAction {
     }
   }
 
+  export class Delete {
+    static readonly type = '[EventAction] Delete';
+
+    constructor(public id: number) {
+    }
+  }
+
 }

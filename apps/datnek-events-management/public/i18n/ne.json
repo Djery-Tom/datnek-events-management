@@ -30,7 +30,8 @@
     "description": "Beschrijving",
     "event_url": "Vergaderlink",
     "event_location": "Adres van de evenementenlocatie",
-    "publish": "Publiceren"
+    "publish": "Publiceren",
+    "speakers": "Sprekers"
   },
 
   "errors": {

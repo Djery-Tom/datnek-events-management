@@ -1,0 +1,35 @@
+<label for="speakers" class="form-label">{{'form.speakers' | translate}} {{field.props.required ? '*' : ''}}</label>
+<div class="form-control d-flex mx-3 w-auto flex-wrap" [class.is-invalid]="this.formControlHasError()">
+  @for (speaker of $selectedSpeakers(); track speaker) {
+    <div class="bg-grey rounded-1 d-flex justify-content-center align-items-center p-2 me-2">
+      <img src="images/default-avatar.webp" height="24" width="24" alt="profile image" class="me-1 img-fluid" />
+      <span>{{speaker}}</span>
+      <a href="javascript:void(0)" class="text-black text-decoration-none" (click)="removeSpeaker(speaker)">&nbsp;x</a>
+    </div>
+  }
+  <input
+    id="speakers"
+    type="text"
+    class="border-0"
+    style="outline: none"
+    placement="top-start"
+    [showHint]="true"
+    [popupClass]="'d-flex flex-column gap-2 w-auto'"
+    [formlyAttributes]="field"
+    [ngbTypeahead]="search"
+    [resultTemplate]="rt"
+    [inputFormatter]="formatter"
+    (selectItem)="onSelect($event)"
+  />
+
+</div>
+
+@if (this.formControlHasError()) {
+  <div class="d-block invalid-feedback ms-3 mb-3" >{{'errors.required_field' | translate}}</div>
+}
+
+<ng-template #rt let-r="result" let-t="term">
+  <img src="images/default-avatar.webp" height="32" width="32" alt="profile image" class="me-2"  />
+  <span>{{r}}</span>
+<!--  <ngb-highlight [result]="r" [term]="t"></ngb-highlight>-->
+</ng-template>

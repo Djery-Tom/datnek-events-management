@@ -12,6 +12,7 @@ export namespace EventInput {
     endDate: string;
     endTime: string;
     description: string;
+    speakers:string[];
   }
 
   export interface Update {
@@ -26,6 +27,7 @@ export namespace EventInput {
     endDate: string;
     endTime: string;
     description: string;
+    speakers:string[];
   }
 
   export interface Delete {

@@ -1,6 +1,6 @@
 <!-- Cover Image -->
 <div class="mb-3 d-flex flex-column align-content-center justify-content-center text-center p-5 cover-image-input"
-     (click)="coverImage.click()" [style.background]="$previewUrl() ? 'url('+$previewUrl()+')' : 'grey'"
+     (click)="coverImage.click()" [style.background]="$previewUrl() ? 'url('+$previewUrl()+')' : '#f6f6f6'"
      [ngClass]="{'border border-2 border-danger' : this.formControlHasError()}">
   <input type="file" class="d-none" id="cover-image" accept="image/jpeg,image/png"
          [formlyAttributes]="field" #coverImage (change)="showPreview($event)">

@@ -14,6 +14,7 @@ import { InMemoryWebApiModule } from 'angular-in-memory-web-api';
 import { DatabaseService, EventState } from '@datnek-events-management/events';
 import { provideAnimations } from '@angular/platform-browser/animations';
 import { provideToastr } from 'ngx-toastr';
+import { SpeakersInputComponent } from './fields/speakers-input/speakers-input.component';
 
 registerLocaleData(localeFr, 'fr');
 
@@ -36,6 +37,7 @@ export const appConfig: ApplicationConfig = {
       FormlyModule.forRoot({
         types: [
           { name: 'cover-image-input', component: CoverImageInputComponent },
+          { name: 'speakers-input', component: SpeakersInputComponent },
         ],
       }),
       FormlyBootstrapModule,

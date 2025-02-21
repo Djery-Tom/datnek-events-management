@@ -30,7 +30,8 @@
     "description": "Description",
     "event_url": "Lien du meeting",
     "event_location": "Adresse du lieu de l'évènement",
-    "publish": "Publier"
+    "publish": "Publier",
+    "speakers": "Intervenants"
   },
 
   "errors": {

@@ -16,13 +16,17 @@ import {
   EventInput,
   EventAction,
   EventOutput,
-  EVENTS_STATE_NAME
+  EVENTS_STATE_NAME, DataService
 } from '@datnek-events-management/events';
 import { Store } from '@ngxs/store';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { map } from 'rxjs';
 
+interface SelectOption{
+  label: string;
+  value: string;
+}
 
 @Component({
   selector: 'app-event-form',
@@ -38,6 +42,7 @@ export class EventFormComponent implements OnInit {
   private translateService = inject(TranslateService);
   private store = inject(Store);
   private activeModal = inject(NgbActiveModal);
+  private dataService = inject(DataService);
 
   form = new FormGroup({});
   model: any = {};
@@ -60,6 +65,7 @@ export class EventFormComponent implements OnInit {
     this.configStartDatesField(),
     this.configEndDatesField(),
     this.configDescriptionField(),
+    this.configSpeakersField()
   ];
 
   private configCoverImageField(): FormlyFieldConfig {
@@ -86,10 +92,7 @@ export class EventFormComponent implements OnInit {
       type: 'select',
       props: {
         required: true,
-        options: [
-          { label: 'Djery DIETCHI', value: 'Djery DIETCHI' },
-          { label: 'Danick Takam', value: 'Danick Takam' },
-        ],
+        options: this.dataService.getOrganizers().map(organizer => <SelectOption>{label: organizer, value: organizer}),
       },
       expressions: {
         'props.label': this.translateService.stream('form.organizer'),
@@ -258,6 +261,7 @@ export class EventFormComponent implements OnInit {
           },
           expressions: {
             'props.label': this.translateService.stream('form.end_date'),
+            'props.min': 'model.startDate',
             'model.endDate': (field: FormlyFieldConfig) => this.$selectedEvent()?.endDate
           },
           validation: {
@@ -311,6 +315,26 @@ export class EventFormComponent implements OnInit {
       },
     };
   }
+
+  private configSpeakersField(): FormlyFieldConfig {
+    return {
+      key: 'speakers',
+      type: 'speakers-input',
+      className: 'mx-3',
+      props: {
+        required: true,
+      },
+      expressions: {
+        'model.speakers': (field: FormlyFieldConfig) => this.$selectedEvent()?.speakers
+      },
+      validation: {
+        messages: {
+          required:  () => this.translateService.instant('errors.required_field'),
+        },
+      },
+    };
+  }
+
 
   onSubmit(formDirective: FormGroupDirective) {
     if (this.form.invalid) {

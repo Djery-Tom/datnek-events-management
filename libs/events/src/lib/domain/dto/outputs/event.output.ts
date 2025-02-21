@@ -13,6 +13,7 @@ export namespace EventOutput {
     endDate: string;
     endTime: string;
     description: string;
+    speakers:string[];
   }
 
   export class Get {
@@ -27,6 +28,7 @@ export namespace EventOutput {
     endDate = '';
     endTime = '';
     description = '';
+    speakers:string[] = [];
 
     isOnline() {
       return this.eventUrl !== undefined;
@@ -49,6 +51,7 @@ export namespace EventOutput {
     endDate: string;
     endTime: string;
     description: string;
+    speakers:string[];
   }
 
   export interface Delete {

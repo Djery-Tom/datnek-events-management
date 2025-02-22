@@ -5,11 +5,10 @@ import {Observable} from "rxjs";
 
 
 import { EventAction } from '../actions';
-import { EventOutput } from '../../domain/dto';
-import { EventService } from '../../application/services';
+import { EventOutput , EVENTS_STATE_NAME } from '../../domain';
+import { EventService } from '../../application';
 import { ToastrService } from 'ngx-toastr';
 import { TranslateService } from '@ngx-translate/core';
-import { EVENTS_STATE_NAME } from '../../domain/constants';
 
 
 interface EventStateModel {

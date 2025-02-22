@@ -1,10 +1,9 @@
 import { Component, inject } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { Title } from '@angular/platform-browser';
-import { HeaderComponent } from './components/header/header.component';
 
 @Component({
-  imports: [RouterModule, HeaderComponent],
+  imports: [RouterModule],
   standalone: true,
   selector: 'app-root',
   templateUrl: './app.component.html',

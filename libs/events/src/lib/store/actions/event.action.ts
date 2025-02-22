@@ -1,4 +1,4 @@
-import { EventInput } from '../../domain/dto';
+import { EventInput } from '../../domain';
 
 // eslint-disable-next-line @typescript-eslint/no-namespace
 export namespace EventAction {

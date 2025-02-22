@@ -5,7 +5,7 @@ import { EventFormComponent } from '../event-form/event-form.component';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
-  selector: 'app-post',
+  selector: 'lib-events-post',
   standalone: true,
   imports: [CommonModule, TranslatePipe],
   templateUrl: './post.component.html',

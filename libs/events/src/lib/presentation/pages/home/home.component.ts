@@ -1,13 +1,18 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { TranslatePipe } from '@ngx-translate/core';
-import { PostComponent } from '../../components/post/post.component';
-import { EventComponent } from '../../components/event/event.component';
+import { PostComponent, EventComponent , HeaderComponent } from '../../components';
 
 @Component({
-  selector: 'app-home',
+  selector: 'lib-events-home',
   standalone: true,
-  imports: [CommonModule, TranslatePipe, PostComponent, EventComponent],
+  imports: [
+    CommonModule,
+    TranslatePipe,
+    PostComponent,
+    EventComponent,
+    HeaderComponent,
+  ],
   templateUrl: './home.component.html',
   styleUrl: './home.component.css',
 })

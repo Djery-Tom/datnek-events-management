@@ -8,13 +8,16 @@ import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { provideTranslateService, TranslateLoader, TranslateService } from '@ngx-translate/core';
 import { FormlyModule } from '@ngx-formly/core';
 import { FormlyBootstrapModule } from '@ngx-formly/bootstrap';
-import { CoverImageInputComponent } from './fields/cover-image-input/cover-image-input.component';
 import { provideStore } from '@ngxs/store';
 import { InMemoryWebApiModule } from 'angular-in-memory-web-api';
-import { DatabaseService, EventState } from '@datnek-events-management/events';
+import {
+  CoverImageInputComponent,
+  DatabaseService,
+  EventState,
+  SpeakersInputComponent
+} from '@datnek-events-management/events';
 import { provideAnimations } from '@angular/platform-browser/animations';
 import { provideToastr } from 'ngx-toastr';
-import { SpeakersInputComponent } from './fields/speakers-input/speakers-input.component';
 
 registerLocaleData(localeFr, 'fr');
 

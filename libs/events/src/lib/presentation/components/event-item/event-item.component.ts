@@ -1,13 +1,13 @@
 import { Component, inject, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { EventAction, EventInput, EventOutput } from '@datnek-events-management/events';
 import { TranslatePipe } from '@ngx-translate/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { EventFormComponent } from '../event-form/event-form.component';
 import { ConfirmDeleteComponent } from '../confirm-delete/confirm-delete.component';
+import { EventInput, EventOutput } from '../../../domain';
 
 @Component({
-  selector: 'app-event-item',
+  selector: 'lib-events-event-item',
   standalone: true,
   imports: [CommonModule, TranslatePipe],
   templateUrl: './event-item.component.html',

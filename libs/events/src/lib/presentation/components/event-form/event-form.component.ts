@@ -11,17 +11,13 @@ import { CommonModule } from '@angular/common';
 import { TranslatePipe, TranslateService } from '@ngx-translate/core';
 import { FormGroup, FormGroupDirective, ReactiveFormsModule } from '@angular/forms';
 import { FormlyFieldConfig, FormlyFormOptions, FormlyModule } from '@ngx-formly/core';
-import {
-  EventTypeEnum,
-  EventInput,
-  EventAction,
-  EventOutput,
-  EVENTS_STATE_NAME, DataService
-} from '@datnek-events-management/events';
 import { Store } from '@ngxs/store';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { map } from 'rxjs';
+import { DataService } from '../../../application';
+import { EventInput, EventOutput, EVENTS_STATE_NAME, EventTypeEnum} from '../../../domain';
+import { EventAction } from '../../../store';
 
 interface SelectOption{
   label: string;
@@ -29,7 +25,7 @@ interface SelectOption{
 }
 
 @Component({
-  selector: 'app-event-form',
+  selector: 'lib-events-event-form',
   standalone: true,
   imports: [CommonModule, TranslatePipe, ReactiveFormsModule, FormlyModule],
   templateUrl: './event-form.component.html',

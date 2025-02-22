@@ -2,11 +2,12 @@ import { Component, inject, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { TranslatePipe } from '@ngx-translate/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
-import { EventAction, EventInput } from '@datnek-events-management/events';
 import { Store } from '@ngxs/store';
+import { EventInput } from '../../../domain';
+import { EventAction } from '../../../store';
 
 @Component({
-  selector: 'app-confirm-delete',
+  selector: 'lib-events-confirm-delete',
   standalone: true,
   imports: [CommonModule, TranslatePipe],
   templateUrl: './confirm-delete.component.html',

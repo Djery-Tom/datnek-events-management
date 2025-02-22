@@ -5,10 +5,10 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgbTypeahead, NgbTypeaheadSelectItemEvent } from '@ng-bootstrap/ng-bootstrap';
 import { TranslatePipe } from '@ngx-translate/core';
 import { debounceTime, map, Observable, OperatorFunction } from 'rxjs';
-import { DataService } from '@datnek-events-management/events';
+import { DataService } from '../../../application';
 
 @Component({
-  selector: 'app-speakers-input',
+  selector: 'lib-events-speakers-input',
   standalone: true,
   imports: [
     CommonModule,

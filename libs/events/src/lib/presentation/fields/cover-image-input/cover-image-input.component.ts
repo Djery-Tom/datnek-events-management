@@ -5,7 +5,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { TranslatePipe } from '@ngx-translate/core';
 
 @Component({
-  selector: 'app-cover-image-input',
+  selector: 'lib-events-cover-image-input',
   standalone: true,
   imports: [CommonModule, FormlyModule, ReactiveFormsModule, TranslatePipe],
   templateUrl: './cover-image-input.component.html',

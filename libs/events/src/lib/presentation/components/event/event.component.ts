@@ -1,14 +1,15 @@
-import { ChangeDetectionStrategy, Component, inject, OnInit, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Store } from '@ngxs/store';
-import { EventAction, EventOutput, EVENTS_STATE_NAME } from '@datnek-events-management/events';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { EventItemComponent } from '../event-item/event-item.component';
 import { map } from 'rxjs';
 import { TranslatePipe } from '@ngx-translate/core';
+import { EventOutput, EVENTS_STATE_NAME } from '../../../domain';
+import { EventAction } from '../../../store';
 
 @Component({
-  selector: 'app-event',
+  selector: 'lib-events-event',
   standalone: true,
   imports: [CommonModule, EventItemComponent, TranslatePipe],
   templateUrl: './event.component.html',

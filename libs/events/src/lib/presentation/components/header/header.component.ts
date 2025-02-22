@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { TranslatePipe, TranslateService } from '@ngx-translate/core';
 
 @Component({
-  selector: 'app-header',
+  selector: 'lib-events-header',
   standalone: true,
   imports: [CommonModule, TranslatePipe],
   templateUrl: './header.component.html',

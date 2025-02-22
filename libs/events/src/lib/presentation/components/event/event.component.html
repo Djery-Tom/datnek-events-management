@@ -2,7 +2,7 @@
   @if ($events()) {
     @for (event of $events() ; track event) {
       @defer {
-        <app-event-item [event]="event"></app-event-item>
+        <lib-events-event-item [event]="event"></lib-events-event-item>
       }
     } @empty {
       <p class="text-center text-muted my-5">{{'no_event' | translate}}</p>

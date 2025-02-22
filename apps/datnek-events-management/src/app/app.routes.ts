@@ -1,8 +1,9 @@
 import { Route } from '@angular/router';
+import { HomeComponent } from '@datnek-events-management/events';
 
 export const appRoutes: Route[] = [
   {
     path: '',
-    loadComponent: () => import('@datnek-events-management/events').then(c => c.HomeComponent)
+    component: HomeComponent
   }
 ];
